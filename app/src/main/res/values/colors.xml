@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#5c32c7</color>
+    <color name="colorPrimaryDark">#2962FF</color>
+    <color name="colorAccent">#ff68a5</color>
+    <color name="colorBlack">#FF1B1818</color>
+    <color name="colorBlue">#5552FF</color>
+    <color name="follow">#2E66FF</color>
+    <color name="followcolor">#FFFFFFFF</color>
+
+
+</resources>
