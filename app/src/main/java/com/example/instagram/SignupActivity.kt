@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.service.autofill.SaveInfo
 import android.text.TextUtils
 import android.util.Patterns
+import android.util.Patterns.EMAIL_ADDRESS
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -40,7 +41,7 @@ class SignupActivity : AppCompatActivity() {
         val  Email = email_signup.text.toString().trim()
         val password = pass_signup.text.toString().trim()
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
+        if(!EMAIL_ADDRESS.matcher(Email).matches()){
 
             email_signup.error = "Valid Email Required"
             email_signup.requestFocus()
@@ -107,7 +108,7 @@ class SignupActivity : AppCompatActivity() {
         userMap["username"] = username
         userMap["email"] = email
         userMap["bio"] = "Go Float Yourself"
-        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/instagram-ccd53.appspot.com/o/InstagramCloneDefaultImages%2Fprofile.png?alt=media&token=f351a639-3dd4-4168-948b-4194b5a5c2c7"
+        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/raghav-c7775.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=14985060-efe1-4382-82d2-32993402a296"
 
         userRef.child(currentUserId).setValue(userMap)
             .addOnCompleteListener {task ->
