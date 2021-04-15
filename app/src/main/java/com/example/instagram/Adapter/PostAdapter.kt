@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.example.instagram.CommentsActivity
 import com.example.instagram.MainActivity
 import com.example.instagram.Model.Post
 import com.example.instagram.Model.User
@@ -76,6 +77,13 @@ class PostAdapter(
 
 
             }
+        }
+
+        holder.commentButton.setOnClickListener {
+            val intentComment = Intent(mContext , CommentsActivity:: class.java)
+            intentComment.putExtra("postId", post.getPostid())
+            intentComment.putExtra("publisherId", post.getPublisher())
+            mContext.startActivity(intentComment)
         }
 
     }
