@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "572115140928",
-    "project_id": "raghav-c7775",
-    "storage_bucket": "raghav-c7775.appspot.com"
+    "project_number": "914654663425",
+    "project_id": "instagramapp-3eb27",
+    "storage_bucket": "instagramapp-3eb27.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:572115140928:android:80c8df3d8b10425122faa5",
+        "mobilesdk_app_id": "1:914654663425:android:0150a4942057ec1a628100",
         "android_client_info": {
           "package_name": "com.example.instagram"
         }
       },
       "oauth_client": [
         {
-          "client_id": "572115140928-mcvn3pbie2j6k5vc03dsfm25qmvaqs8p.apps.googleusercontent.com",
+          "client_id": "914654663425-8ino52fdsk6fjgb7gj4qucfhekgspf73.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBG7-7IFjOstv33WmPMMAntA7oMPNN1L4M"
+          "current_key": "AIzaSyAcESAKcZvI02if0G7VfS0lFwOhFo7m9qo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "572115140928-mcvn3pbie2j6k5vc03dsfm25qmvaqs8p.apps.googleusercontent.com",
+              "client_id": "914654663425-8ino52fdsk6fjgb7gj4qucfhekgspf73.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

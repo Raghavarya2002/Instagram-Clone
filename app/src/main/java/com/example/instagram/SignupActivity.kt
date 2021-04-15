@@ -108,7 +108,7 @@ class SignupActivity : AppCompatActivity() {
         userMap["username"] = username
         userMap["email"] = email
         userMap["bio"] = "Go Float Yourself"
-        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/raghav-c7775.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=14985060-efe1-4382-82d2-32993402a296"
+        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/instagram-18dd2.appspot.com/o/profile.png?alt=media&token=f6b9f72a-f71d-4ab7-a95d-562d4fad5d83"
 
         userRef.child(currentUserId).setValue(userMap)
             .addOnCompleteListener {task ->
