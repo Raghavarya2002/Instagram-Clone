@@ -55,6 +55,7 @@ class PostAdapter(
 
         isLike(post.getPostid() , holder.likeButton)
         numberOfLikes(holder.likes , post.getPostid())
+        getTotalComments(holder.comments,post.getPostid())
 
         holder.likeButton.setOnClickListener {
             if (holder.likeButton.tag == "Like"){
@@ -86,6 +87,14 @@ class PostAdapter(
             mContext.startActivity(intentComment)
         }
 
+
+        holder.comments.setOnClickListener {
+            val intentComment = Intent(mContext , CommentsActivity:: class.java)
+            intentComment.putExtra("postId", post.getPostid())
+            intentComment.putExtra("publisherId", post.getPublisher())
+            mContext.startActivity(intentComment)
+        }
+
     }
 
     private fun numberOfLikes(likes: TextView, postid: String) {
@@ -102,6 +111,29 @@ class PostAdapter(
                 if (snapshot.exists())
                 {
                   likes.text = snapshot.childrenCount.toString() + " likes"
+
+                }
+
+            }
+
+        })
+
+    }
+
+    private fun getTotalComments(comments: TextView, postid: String) {
+
+        val commentsRef = FirebaseDatabase.getInstance().reference
+            .child("Comments").child(postid)
+
+        commentsRef.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists())
+                {
+                    comments.text = "View all " + snapshot.childrenCount.toString() + " comments"
 
                 }
 

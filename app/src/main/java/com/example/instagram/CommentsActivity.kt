@@ -2,6 +2,8 @@ package com.example.instagram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import com.example.instagram.Model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -28,11 +30,36 @@ class CommentsActivity : AppCompatActivity() {
         postId = intent.getStringExtra("postId")!!
         publisherId = intent.getStringExtra("publisherId")!!
         firebaseUser = FirebaseAuth.getInstance().currentUser
+
+
         userinfo()
 
+        post_comment.setOnClickListener(View.OnClickListener {
+            if(add_comment!!.text.toString() == "" ){
+                Toast.makeText(this@CommentsActivity, "Please write comments first" , Toast.LENGTH_LONG)
+            }
+            else{
+
+                addComment()
+            }
+        })
 
 
 
+
+
+    }
+
+    private fun addComment() {
+        val commentsRef = FirebaseDatabase.getInstance().reference
+            .child("Comments")
+            .child(postId!!)
+        val commentsMap = HashMap<String , Any>()
+        commentsMap["comment"] = add_comment!!.text.toString()
+        commentsMap["publisher"] = firebaseUser!!.uid
+
+        commentsRef.push().setValue(commentsMap)
+        add_comment!!.text.clear()
     }
 
 
