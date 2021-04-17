@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="1dp"
-    >
+    android:layout_margin="1dp">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:id="@+id/user_profile_image_search"
-            android:src="@drawable/profile"
-            android:layout_alignParentStart="true"
-            android:padding="5dp"
-            android:layout_margin="10dp"
+        android:id="@+id/user_profile_image_search"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:src="@drawable/profile"
 
-            />
+        />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_margin="15dp"
-        android:layout_toEndOf="@+id/user_profile_image_search"
-        >
+        android:layout_toEndOf="@+id/user_profile_image_search">
 
         <TextView
             android:id="@+id/user_name_search"
@@ -39,8 +36,8 @@
             android:id="@+id/user_full_name_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_below="@+id/user_name_search"
+            android:layout_marginLeft="10dp"
             android:text="Full name"
             android:textColor="@color/colorBlack"
             android:textSize="16sp" />
@@ -49,19 +46,17 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/follow_btn_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Follow"
-        android:id="@+id/follow_btn_search"
         android:layout_alignParentEnd="true"
-        android:padding="5dp"
-        android:background="@color/follow"
-        android:textColor="@color/followcolor"
-        android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
-        android:textAllCaps="false"/>
-
-
+        android:layout_marginRight="5dp"
+        android:background="@color/follow"
+        android:padding="5dp"
+        android:text="Follow"
+        android:textAllCaps="false"
+        android:textColor="@color/followcolor" />
 
 
 </RelativeLayout>

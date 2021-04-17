@@ -24,9 +24,9 @@ class CommentsActivity : AppCompatActivity() {
 
     private var postId = ""
     private var publisherId = ""
-    private var firebaseUser : FirebaseUser ? = null
-    private var commentAdapter : CommentAdapter? = null
-    private var commentList : MutableList<Commnet> ? = null
+    private var firebaseUser: FirebaseUser? = null
+    private var commentAdapter: CommentAdapter? = null
+    private var commentList: MutableList<Commnet>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +45,8 @@ class CommentsActivity : AppCompatActivity() {
         linearLayoutManager.reverseLayout = true
         recyclerView.layoutManager = linearLayoutManager
 
-        commentList  = ArrayList()
-        commentAdapter = CommentAdapter(this,commentList)
+        commentList = ArrayList()
+        commentAdapter = CommentAdapter(this, commentList)
         recyclerView.adapter = commentAdapter
 
 
@@ -55,17 +55,17 @@ class CommentsActivity : AppCompatActivity() {
         getPostImage()
 
         post_comment.setOnClickListener(View.OnClickListener {
-            if(add_comment!!.text.toString() == "" ){
-                Toast.makeText(this@CommentsActivity, "Please write comments first" , Toast.LENGTH_LONG)
-            }
-            else{
+            if (add_comment!!.text.toString() == "") {
+                Toast.makeText(
+                    this@CommentsActivity,
+                    "Please write comments first",
+                    Toast.LENGTH_LONG
+                )
+            } else {
 
                 addComment()
             }
         })
-
-
-
 
 
     }
@@ -74,7 +74,7 @@ class CommentsActivity : AppCompatActivity() {
         val commentsRef = FirebaseDatabase.getInstance().reference
             .child("Comments")
             .child(postId!!)
-        val commentsMap = HashMap<String , Any>()
+        val commentsMap = HashMap<String, Any>()
         commentsMap["comment"] = add_comment!!.text.toString()
         commentsMap["publisher"] = firebaseUser!!.uid
 
@@ -85,15 +85,17 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun userinfo() {
 
-        val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+        val userRef =
+            FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 //  if (context!= null) return
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
 
-                    val user  = snapshot.getValue(User::class.java)
-                    Picasso.get().load(user!!.getimage()).placeholder(R.drawable.profile).into(profile_image_comment)
+                    val user = snapshot.getValue(User::class.java)
+                    Picasso.get().load(user!!.getimage()).placeholder(R.drawable.profile)
+                        .into(profile_image_comment)
 
                 }
 
@@ -107,15 +109,17 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun getPostImage() {
 
-        val postRef = FirebaseDatabase.getInstance().reference.child("Posts").child(postId!!).child("postimage")
+        val postRef = FirebaseDatabase.getInstance().reference.child("Posts").child(postId!!)
+            .child("postimage")
         postRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 //  if (context!= null) return
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
 
-                    val image  = snapshot.value.toString()
-                    Picasso.get().load(image).placeholder(R.drawable.profile).into(post_image_comment)
+                    val image = snapshot.value.toString()
+                    Picasso.get().load(image).placeholder(R.drawable.profile)
+                        .into(post_image_comment)
 
                 }
 
@@ -128,7 +132,7 @@ class CommentsActivity : AppCompatActivity() {
     }
 
 
-    private fun readComments(){
+    private fun readComments() {
         val commentsRef = FirebaseDatabase.getInstance().reference
             .child("Comments")
             .child(postId)
@@ -139,17 +143,17 @@ class CommentsActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-        if (snapshot.exists()){
-            commentList!!.clear()
-            for (snapshot in snapshot.children){
-                val comment = snapshot.getValue(Commnet::class.java)
-                commentList!!.add(comment!!)
-            }
+                if (snapshot.exists()) {
+                    commentList!!.clear()
+                    for (snapshot in snapshot.children) {
+                        val comment = snapshot.getValue(Commnet::class.java)
+                        commentList!!.add(comment!!)
+                    }
 
-            commentAdapter!!.notifyDataSetChanged()
+                    commentAdapter!!.notifyDataSetChanged()
 
 
-        }
+                }
             }
 
         })

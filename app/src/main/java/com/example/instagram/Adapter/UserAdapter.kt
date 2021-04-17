@@ -23,9 +23,11 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class UserAdapter(private var mContext: Context ,
-                  private var mUser: List<User>,
-                  private var isFragment: Boolean = false): RecyclerView.Adapter<ViewHolder>() {
+class UserAdapter(
+    private var mContext: Context,
+    private var mUser: List<User>,
+    private var isFragment: Boolean = false
+) : RecyclerView.Adapter<ViewHolder>() {
 
 
     private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
@@ -45,15 +47,15 @@ class UserAdapter(private var mContext: Context ,
 
         checkFollowingStatus(user.getuid(), holder.followButton)
 
-        holder.itemView.setOnClickListener ( View.OnClickListener {
+        holder.itemView.setOnClickListener(View.OnClickListener {
             val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
             pref.putString("profileId", user.getuid())
             pref.apply()
 
             (mContext as FragmentActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container , ProfileFragment()).commit()
+                .replace(R.id.fragment_container, ProfileFragment()).commit()
 
-        } )
+        })
 
 
 
@@ -98,7 +100,7 @@ class UserAdapter(private var mContext: Context ,
                                         .child("Follow").child(user.getuid())
                                         .child("Followers").child(it1.toString())
                                         .removeValue().addOnCompleteListener { task ->
-                                           if (task.isSuccessful) {
+                                            if (task.isSuccessful) {
                                             }
 
                                         }
@@ -141,15 +143,13 @@ class UserAdapter(private var mContext: Context ,
                 .child("Following")
         }
 
-        followingRef.addValueEventListener(object :ValueEventListener
-        {
+        followingRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
 
-                if(datasnapshot.child(uid).exists()){
+                if (datasnapshot.child(uid).exists()) {
                     followButton.text = "Following"
 
-                }
-                else{
+                } else {
                     followButton.text = "Follow"
 
                 }

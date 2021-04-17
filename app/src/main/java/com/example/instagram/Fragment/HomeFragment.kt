@@ -18,9 +18,9 @@ import com.google.firebase.database.ValueEventListener
 
 
 class HomeFragment : Fragment() {
-    private  var postAdapter : PostAdapter ?= null
-    private var postList: MutableList<Post> ?= null
-    private var followingList : MutableList<Post>?= null
+    private var postAdapter: PostAdapter? = null
+    private var postList: MutableList<Post>? = null
+    private var followingList: MutableList<Post>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +35,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-       val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        var recyclerView : RecyclerView? = null
+        var recyclerView: RecyclerView? = null
         recyclerView = view.findViewById(R.id.recycler_view_home)
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.reverseLayout = true
@@ -45,8 +45,8 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
 
         postList = ArrayList()
-        postAdapter = context?.let { PostAdapter(it , postList as ArrayList<Post>) }
-        recyclerView.adapter =  postAdapter
+        postAdapter = context?.let { PostAdapter(it, postList as ArrayList<Post>) }
+        recyclerView.adapter = postAdapter
 
         checkFollowings()
 
@@ -58,23 +58,20 @@ class HomeFragment : Fragment() {
         return view
 
 
-
-
-
     }
 
     private fun checkFollowings() {
         followingList = ArrayList()
 
         val followingRef = FirebaseDatabase.getInstance().reference
-                .child("Follow").child(FirebaseAuth.getInstance().currentUser!!.uid)
-                .child("Following")
+            .child("Follow").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Following")
 
         followingRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     (followingList as ArrayList<String>).clear()
-                    for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
                         snapshot.key?.let { (followingList as ArrayList<String>).add(it) }
 
                     }
@@ -96,13 +93,13 @@ class HomeFragment : Fragment() {
 
     private fun retrievePosts() {
         val postsRef = FirebaseDatabase.getInstance().reference.child("Posts")
-        postsRef.addValueEventListener(object : ValueEventListener{
+        postsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-               postList?.clear()
-                for (snapshot in snapshot.children){
+                postList?.clear()
+                for (snapshot in snapshot.children) {
                     val post = snapshot.getValue(Post::class.java)
-                    for (id in (followingList as ArrayList<String>)){
-                        if(post!!.getPublisher().equals(id)){
+                    for (id in (followingList as ArrayList<String>)) {
+                        if (post!!.getPublisher().equals(id)) {
                             postList!!.add(post)
 
                         }

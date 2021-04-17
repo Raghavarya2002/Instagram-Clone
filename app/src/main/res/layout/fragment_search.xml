@@ -6,54 +6,55 @@
     tools:context=".Fragment.SearchFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:id="@+id/app_bar_layout_search">
+        android:background="@android:color/white">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/search_toolbar"
-            android:layout_marginTop="4dp"
             android:layout_marginLeft="6dp"
+            android:layout_marginTop="4dp"
             android:layout_marginRight="6dp"
             android:background="@drawable/buttons_background">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
+                    android:id="@+id/search_fragment_icon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:id="@+id/search_fragment_icon"
-                    android:src="@drawable/search"
-                    android:layout_alignParentLeft="true">
-                </ImageView>
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/search"></ImageView>
 
                 <EditText
+                    android:id="@+id/search_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/search_edit_text"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="15dp"
-                    android:textColor="@color/colorPrimary"
                     android:layout_marginRight="11dp"
-                    android:maxLines="1"
                     android:layout_toEndOf="@+id/search_fragment_icon"
-                    android:hint="Search"/>
+                    android:hint="Search"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary" />
 
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_view_search"
-        android:visibility="gone"
-        android:layout_below="@+id/app_bar_layout_search">
+        android:layout_below="@+id/app_bar_layout_search"
+        android:visibility="gone">
 
 
     </androidx.recyclerview.widget.RecyclerView>

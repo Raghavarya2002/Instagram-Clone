@@ -26,9 +26,9 @@ import kotlin.collections.ArrayList
 
 class SearchFragment : Fragment() {
 
-    private var recyclerView: RecyclerView?= null
-    private var userAdapter: UserAdapter?= null
-    private var mUser: MutableList<User>?= null
+    private var recyclerView: RecyclerView? = null
+    private var userAdapter: UserAdapter? = null
+    private var mUser: MutableList<User>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,17 +46,15 @@ class SearchFragment : Fragment() {
         recyclerView?.adapter = userAdapter
 
 
-        view.search_edit_text.addTextChangedListener(object : TextWatcher{
+        view.search_edit_text.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) =
-                if(view.search_edit_text.text.toString() == ""){
+                if (view.search_edit_text.text.toString() == "") {
 
-                }
-
-                else{
+                } else {
                     recyclerView?.visibility = View.VISIBLE
                     retrieveUser()
                     serachUser(s.toString().toLowerCase())
@@ -73,19 +71,18 @@ class SearchFragment : Fragment() {
     }
 
     private fun serachUser(input: String) {
-        var query = FirebaseDatabase.getInstance().getReference()
+        val query = FirebaseDatabase.getInstance().getReference()
             .child("Users")
             .orderByChild("fullname")
             .startAt(input)
             .endAt(input + "\uf8ff")
-        query.addValueEventListener(object: ValueEventListener{
+        query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 mUser?.clear()
-                for (snapshot in dataSnapshot.children)
-                {
+                for (snapshot in dataSnapshot.children) {
                     val user = snapshot.getValue(User::class.java)
-                    if(user!= null){
+                    if (user != null) {
                         mUser?.add(user)
 
                     }
@@ -100,20 +97,17 @@ class SearchFragment : Fragment() {
         })
 
 
-
-
     }
 
     private fun retrieveUser() {
-        var usersRef = FirebaseDatabase.getInstance().getReference().child("Users")
-        usersRef.addValueEventListener(object: ValueEventListener{
+        val usersRef = FirebaseDatabase.getInstance().reference.child("Users")
+        usersRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (view?.search_edit_text?.text.toString() == ""){
+                if (view?.search_edit_text?.text.toString() == "") {
                     mUser?.clear()
-                    for (snapshot in dataSnapshot.children)
-                    {
+                    for (snapshot in dataSnapshot.children) {
                         val user = snapshot.getValue(User::class.java)
-                        if(user!= null){
+                        if (user != null) {
                             mUser?.add(user)
 
                         }

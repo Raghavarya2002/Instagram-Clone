@@ -22,7 +22,7 @@ class SignupActivity : AppCompatActivity() {
 
 
         Signin_link_btn.setOnClickListener {
-            startActivity(Intent(this,SigninActivity::class.java))
+            startActivity(Intent(this, SigninActivity::class.java))
         }
 
         signup_btn.setOnClickListener {
@@ -38,34 +38,49 @@ class SignupActivity : AppCompatActivity() {
     private fun createAccount() {
         val fullname = fullname_signup.text.toString().toLowerCase()
         val username = username_signup.text.toString().toLowerCase()
-        val  Email = email_signup.text.toString().trim()
+        val Email = email_signup.text.toString().trim()
         val password = pass_signup.text.toString().trim()
 
-        if(!EMAIL_ADDRESS.matcher(Email).matches()){
+        if (!EMAIL_ADDRESS.matcher(Email).matches()) {
 
             email_signup.error = "Valid Email Required"
             email_signup.requestFocus()
 
         }
 
-        if (password.length < 6 ){
+        if (password.length < 6) {
             pass_signup.error = "At least 6 characters are required"
             pass_signup.requestFocus()
         }
 
 
-        when{
+        when {
 
 
+            TextUtils.isEmpty(fullname) -> Toast.makeText(
+                this,
+                "Full Name is required .",
+                Toast.LENGTH_LONG
+            ).show()
+            TextUtils.isEmpty(username) -> Toast.makeText(
+                this,
+                "Username is required .",
+                Toast.LENGTH_LONG
+            ).show()
+            TextUtils.isEmpty(Email) -> Toast.makeText(
+                this,
+                "Email is required .",
+                Toast.LENGTH_LONG
+            ).show()
 
-            TextUtils.isEmpty(fullname) -> Toast.makeText(this,"Full Name is required .",Toast.LENGTH_LONG).show()
-            TextUtils.isEmpty(username) -> Toast.makeText(this,"Username is required .",Toast.LENGTH_LONG).show()
-            TextUtils.isEmpty(Email) -> Toast.makeText(this,"Email is required .",Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(password) -> Toast.makeText(
+                this,
+                "Password is required .",
+                Toast.LENGTH_LONG
+            ).show()
 
-            TextUtils.isEmpty(password) -> Toast.makeText(this,"Password is required .",Toast.LENGTH_LONG).show()
 
-
-            else->{
+            else -> {
 
                 val progressDialog = ProgressDialog(this@SignupActivity)
                 progressDialog.setTitle("SignUp")
@@ -74,17 +89,15 @@ class SignupActivity : AppCompatActivity() {
                 progressDialog.show()
 
                 val mAuth = FirebaseAuth.getInstance()
-                mAuth.createUserWithEmailAndPassword(Email,password)
-                    .addOnCompleteListener{task ->
-                        if(task.isSuccessful){
+                mAuth.createUserWithEmailAndPassword(Email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
 
-                            saveUserInfo(fullname,username,Email,password,progressDialog)
+                            saveUserInfo(fullname, username, Email, password, progressDialog)
 
-                        }
-
-                        else{
+                        } else {
                             val message = task.exception!!
-                            Toast.makeText(this,"Error: $message",Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "Error: $message", Toast.LENGTH_LONG).show()
                             mAuth.signOut()
                             progressDialog.dismiss()
                         }
@@ -98,42 +111,52 @@ class SignupActivity : AppCompatActivity() {
 
     }
 
-    private fun saveUserInfo(fullname: String, username: String, email: String, password: String , progressDialog: ProgressDialog) {
+    private fun saveUserInfo(
+        fullname: String,
+        username: String,
+        email: String,
+        password: String,
+        progressDialog: ProgressDialog
+    ) {
 
         val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
         val userRef: DatabaseReference = FirebaseDatabase.getInstance().reference.child("Users")
-        val userMap = HashMap<String,Any>()
+        val userMap = HashMap<String, Any>()
         userMap["uid"] = currentUserId
         userMap["fullname"] = fullname
         userMap["username"] = username
         userMap["email"] = email
         userMap["bio"] = "Go Float Yourself"
-        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/instagram-18dd2.appspot.com/o/profile.png?alt=media&token=f6b9f72a-f71d-4ab7-a95d-562d4fad5d83"
+        userMap["image"] =
+            "https://firebasestorage.googleapis.com/v0/b/instagram-18dd2.appspot.com/o/profile.png?alt=media&token=f6b9f72a-f71d-4ab7-a95d-562d4fad5d83"
 
         userRef.child(currentUserId).setValue(userMap)
-            .addOnCompleteListener {task ->
-                if (task.isSuccessful){
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
 
                     progressDialog.dismiss()
-                    Toast.makeText(this,"Account has been created successfully.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Account has been created successfully.",
+                        Toast.LENGTH_LONG
+                    ).show()
 
 
-                        FirebaseDatabase.getInstance().reference
-                            .child("Follow").child(currentUserId)
-                            .child("Following").child(currentUserId)
-                            .setValue(true)
+                    FirebaseDatabase.getInstance().reference
+                        .child("Follow").child(currentUserId)
+                        .child("Following").child(currentUserId)
+                        .setValue(true)
 
                     val intent = Intent(this@SignupActivity, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                     finish()
 
-                }
-                else{
+                } else {
 
                     val message = task.exception!!
-                    Toast.makeText(this,"Error: $message",Toast.LENGTH_LONG).show()
-                   FirebaseAuth.getInstance().signOut()
+                    Toast.makeText(this, "Error: $message", Toast.LENGTH_LONG).show()
+                    FirebaseAuth.getInstance().signOut()
                     progressDialog.dismiss()
                 }
 

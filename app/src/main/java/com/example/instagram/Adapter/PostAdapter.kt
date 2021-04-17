@@ -22,18 +22,16 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 
 class PostAdapter(
-    private val mContext: Context ,
-    private val mPost: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewHolder>()
-
-
-{
-    private var firebaseUser: FirebaseUser?= null
+    private val mContext: Context,
+    private val mPost: List<Post>
+) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+    private var firebaseUser: FirebaseUser? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view = LayoutInflater.from(mContext).inflate(R.layout.posts_layout,parent,false)
-        return  ViewHolder(view)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.posts_layout, parent, false)
+        return ViewHolder(view)
 
     }
 
@@ -42,10 +40,9 @@ class PostAdapter(
         val post = mPost[position]
         Picasso.get().load(post.getPostimage()).into(holder.postImage)
 
-        if (post.getDescription().equals("")){
+        if (post.getDescription().equals("")) {
             holder.description.visibility = View.GONE
-        }
-        else{
+        } else {
             holder.description.visibility = View.VISIBLE
             holder.description.setText(post.getDescription())
 
@@ -53,27 +50,26 @@ class PostAdapter(
 
         publisherInfo(holder.profileImage, holder.userName, holder.publisher, post.getPublisher())
 
-        isLike(post.getPostid() , holder.likeButton)
-        numberOfLikes(holder.likes , post.getPostid())
-        getTotalComments(holder.comments,post.getPostid())
+        isLike(post.getPostid(), holder.likeButton)
+        numberOfLikes(holder.likes, post.getPostid())
+        getTotalComments(holder.comments, post.getPostid())
 
         holder.likeButton.setOnClickListener {
-            if (holder.likeButton.tag == "Like"){
-                    FirebaseDatabase.getInstance().reference
-                        .child("Likes")
-                        .child(post.getPostid())
-                        .child(firebaseUser!!.uid)
-                        .setValue(true)
+            if (holder.likeButton.tag == "Like") {
+                FirebaseDatabase.getInstance().reference
+                    .child("Likes")
+                    .child(post.getPostid())
+                    .child(firebaseUser!!.uid)
+                    .setValue(true)
 
-            }
-            else{
+            } else {
 
                 FirebaseDatabase.getInstance().reference
                     .child("Likes")
                     .child(post.getPostid())
                     .child(firebaseUser!!.uid)
                     .removeValue()
-                val intent = Intent(mContext , MainActivity:: class.java)
+                val intent = Intent(mContext, MainActivity::class.java)
                 mContext.startActivity(intent)
 
 
@@ -81,7 +77,7 @@ class PostAdapter(
         }
 
         holder.commentButton.setOnClickListener {
-            val intentComment = Intent(mContext , CommentsActivity:: class.java)
+            val intentComment = Intent(mContext, CommentsActivity::class.java)
             intentComment.putExtra("postId", post.getPostid())
             intentComment.putExtra("publisherId", post.getPublisher())
             mContext.startActivity(intentComment)
@@ -89,7 +85,7 @@ class PostAdapter(
 
 
         holder.comments.setOnClickListener {
-            val intentComment = Intent(mContext , CommentsActivity:: class.java)
+            val intentComment = Intent(mContext, CommentsActivity::class.java)
             intentComment.putExtra("postId", post.getPostid())
             intentComment.putExtra("publisherId", post.getPublisher())
             mContext.startActivity(intentComment)
@@ -102,15 +98,14 @@ class PostAdapter(
         val likesRef = FirebaseDatabase.getInstance().reference
             .child("Likes").child(postid)
 
-        likesRef.addValueEventListener(object :ValueEventListener{
+        likesRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists())
-                {
-                  likes.text = snapshot.childrenCount.toString() + " likes"
+                if (snapshot.exists()) {
+                    likes.text = snapshot.childrenCount.toString() + " likes"
 
                 }
 
@@ -125,14 +120,13 @@ class PostAdapter(
         val commentsRef = FirebaseDatabase.getInstance().reference
             .child("Comments").child(postid)
 
-        commentsRef.addValueEventListener(object :ValueEventListener{
+        commentsRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists())
-                {
+                if (snapshot.exists()) {
                     comments.text = "View all " + snapshot.childrenCount.toString() + " comments"
 
                 }
@@ -149,23 +143,22 @@ class PostAdapter(
             .child("Likes")
             .child(postId)
 
-        likeRef.addValueEventListener(object :ValueEventListener{
+        likeRef.addValueEventListener(object : ValueEventListener {
 
 
             override fun onDataChange(snapshot: DataSnapshot) {
-               if (snapshot.child(firebaseUser!!.uid).exists())
-               {
-                   likeButton.setImageResource(R.drawable.heart_clicked)
-                   likeButton.tag = "Liked"
+                if (snapshot.child(firebaseUser!!.uid).exists()) {
+                    likeButton.setImageResource(R.drawable.heart_clicked)
+                    likeButton.tag = "Liked"
 
-               }
-                else{
+                } else {
 
-                   likeButton.setImageResource(R.drawable.heart_not_clicked)
-                   likeButton.tag = "Like"
+                    likeButton.setImageResource(R.drawable.heart_not_clicked)
+                    likeButton.tag = "Like"
 
-               }
+                }
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -175,22 +168,22 @@ class PostAdapter(
 
 
     override fun getItemCount(): Int {
-        return  mPost.size
+        return mPost.size
 
     }
 
-    inner  class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var profileImage : CircleImageView
-        var postImage : ImageView
-        var likeButton : ImageView
-        var commentButton : ImageView
-        var saveButton : ImageView
-        var userName : TextView
-        var likes : TextView
-        var publisher : TextView
-        var description : TextView
-        var comments : TextView
+        var profileImage: CircleImageView
+        var postImage: ImageView
+        var likeButton: ImageView
+        var commentButton: ImageView
+        var saveButton: ImageView
+        var userName: TextView
+        var likes: TextView
+        var publisher: TextView
+        var description: TextView
+        var comments: TextView
 
         init {
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
@@ -205,22 +198,26 @@ class PostAdapter(
             comments = itemView.findViewById(R.id.comments)
 
 
-
         }
 
     }
 
 
-    private fun publisherInfo(profileImage: CircleImageView, userName: TextView, publisher: TextView, publisherID: String) {
+    private fun publisherInfo(
+        profileImage: CircleImageView,
+        userName: TextView,
+        publisher: TextView,
+        publisherID: String
+    ) {
         val usersRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherID)
-        usersRef.addValueEventListener(object : ValueEventListener{
+        usersRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    val user  = snapshot.getValue(User::class.java)
-                    Picasso.get().load(user!!.getimage()).placeholder(R.drawable.profile).into(profileImage)
+                if (snapshot.exists()) {
+                    val user = snapshot.getValue(User::class.java)
+                    Picasso.get().load(user!!.getimage()).placeholder(R.drawable.profile)
+                        .into(profileImage)
                     userName.text = user.getUsername()
                     publisher.text = user.getfullname()
-
 
 
                 }

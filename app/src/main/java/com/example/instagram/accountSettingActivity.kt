@@ -30,7 +30,7 @@ class accountSettingActivity : AppCompatActivity() {
     private var checker = ""
     private var myUrl = ""
     private var imageUri: Uri? = null
-    private var storageProfilePicRef:StorageReference ?= null
+    private var storageProfilePicRef: StorageReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,22 +53,19 @@ class accountSettingActivity : AppCompatActivity() {
 
             checker = "clicked"
             CropImage.activity()
-                .setAspectRatio(1,1)
+                .setAspectRatio(1, 1)
                 .start(this@accountSettingActivity)
 
         }
 
         save_info_profile_btn.setOnClickListener {
 
-            if (checker == "clicked"){
+            if (checker == "clicked") {
 
                 uploadImageAndUploadInfo()
 
 
-            }
-
-            else
-            {
+            } else {
                 updateUserInfoOnly()
 
             }
@@ -80,10 +77,9 @@ class accountSettingActivity : AppCompatActivity() {
     }
 
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null){
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
             profile_image_view_profile_frag.setImageURI(imageUri)
@@ -91,25 +87,29 @@ class accountSettingActivity : AppCompatActivity() {
     }
 
     private fun updateUserInfoOnly() {
-         when {
+        when {
             full_name_profile_frag.toString() == "" -> {
-                Toast.makeText(this, "Full name is required" , Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Full name is required", Toast.LENGTH_LONG).show()
             }
             username_profile_frag.toString() == "" -> {
-                Toast.makeText(this, "Username is required" , Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Username is required", Toast.LENGTH_LONG).show()
             }
             bio_profile_frag.toString() == "" -> {
-                Toast.makeText(this, "Bio is required" , Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Bio is required", Toast.LENGTH_LONG).show()
             }
             else -> {
                 val userRef = FirebaseDatabase.getInstance().reference.child("Users")
-                val userMap = HashMap<String,Any>()
+                val userMap = HashMap<String, Any>()
 
                 userMap["fullname"] = full_name_profile_frag.text.toString().toLowerCase()
                 userMap["username"] = username_profile_frag.text.toString().toLowerCase()
                 userMap["bio"] = bio_profile_frag.text.toString().toLowerCase()
                 userRef.child(firebaseUser.uid).updateChildren(userMap)
-                Toast.makeText(this,"Account setting has been updated successfully.",Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Account setting has been updated successfully.",
+                    Toast.LENGTH_LONG
+                ).show()
 
                 val intent = Intent(this@accountSettingActivity, MainActivity::class.java)
                 startActivity(intent)
@@ -124,15 +124,17 @@ class accountSettingActivity : AppCompatActivity() {
 
     private fun userinfo() {
 
-        val userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.uid)
+        val userRef =
+            FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.uid)
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 //  if (context!= null) return
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
 
-                    val user  = snapshot.getValue(User::class.java)
-                    Picasso.get().load(user!!.getimage()).placeholder(R.drawable.profile).into(profile_image_view_profile_frag)
+                    val user = snapshot.getValue(User::class.java)
+                    Picasso.get().load(user!!.getimage()).placeholder(R.drawable.profile)
+                        .into(profile_image_view_profile_frag)
                     username_profile_frag.setText(user!!.getUsername())
                     full_name_profile_frag.setText(user!!.getfullname())
                     bio_profile_frag.setText(user!!.getbio())
@@ -149,25 +151,22 @@ class accountSettingActivity : AppCompatActivity() {
     private fun uploadImageAndUploadInfo() {
 
 
-
-        when
-        {
+        when {
             imageUri == null -> {
-                Toast.makeText(this, "Please Select an image first" , Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please Select an image first", Toast.LENGTH_LONG).show()
             }
 
             full_name_profile_frag.toString() == "" -> {
-                Toast.makeText(this, "Full name is required" , Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Full name is required", Toast.LENGTH_LONG).show()
             }
             username_profile_frag.toString() == "" -> {
-                Toast.makeText(this, "Username is required" , Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Username is required", Toast.LENGTH_LONG).show()
             }
             bio_profile_frag.toString() == "" -> {
-                Toast.makeText(this, "Bio is required" , Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Bio is required", Toast.LENGTH_LONG).show()
             }
 
-            else ->
-            {
+            else -> {
                 val progressDialog = ProgressDialog(this)
                 progressDialog.setTitle("Account Setting")
                 progressDialog.setMessage("Please wait , we're updating your profile...")
@@ -177,7 +176,7 @@ class accountSettingActivity : AppCompatActivity() {
                 var uploadTask: StorageTask<*>
                 uploadTask = fileRef.putFile(imageUri!!)
 
-                uploadTask.continueWithTask(com.google.android.gms.tasks.Continuation <UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                uploadTask.continueWithTask(com.google.android.gms.tasks.Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                     if (!task.isSuccessful) {
                         task.exception?.let {
                             throw it
@@ -188,31 +187,33 @@ class accountSettingActivity : AppCompatActivity() {
                     return@Continuation fileRef.downloadUrl
 
 
-                }).addOnCompleteListener (OnCompleteListener<Uri>{ task ->
-                    if (task.isSuccessful){
+                }).addOnCompleteListener(OnCompleteListener<Uri> { task ->
+                    if (task.isSuccessful) {
                         val downloadUrl = task.result
                         myUrl = downloadUrl.toString()
                         val ref = FirebaseDatabase.getInstance().reference.child("Users")
-                        val userMap = HashMap<String,Any>()
+                        val userMap = HashMap<String, Any>()
 
                         userMap["fullname"] = full_name_profile_frag.text.toString().toLowerCase()
                         userMap["username"] = username_profile_frag.text.toString().toLowerCase()
                         userMap["bio"] = bio_profile_frag.text.toString().toLowerCase()
                         userMap["image"] = myUrl
                         ref.child(firebaseUser.uid).updateChildren(userMap)
-                        Toast.makeText(this,"Account setting has been updated successfully.",Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            "Account setting has been updated successfully.",
+                            Toast.LENGTH_LONG
+                        ).show()
 
                         val intent = Intent(this@accountSettingActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                         progressDialog.dismiss()
-                    }
-                    else
-                    {
+                    } else {
                         progressDialog.dismiss()
                     }
 
-                } )
+                })
             }
         }
 

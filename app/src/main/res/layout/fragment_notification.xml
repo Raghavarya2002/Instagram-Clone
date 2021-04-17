@@ -6,17 +6,17 @@
     tools:context=".Fragment.NotificationFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout_notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:id="@+id/app_bar_layout_notifications">
+        android:background="@android:color/white">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/notifications_toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/notifications_toolbar"
-            android:layout_marginTop="4dp"
             android:layout_marginLeft="6dp"
+            android:layout_marginTop="4dp"
             android:layout_marginRight="6dp"
             android:background="@android:color/white">
 
@@ -27,12 +27,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Activity"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
                     android:maxLines="1"
+                    android:text="Activity"
                     android:textColor="@android:color/black"
-                    android:layout_centerVertical="true"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
 
             </RelativeLayout>
@@ -42,9 +42,9 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_notifications"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_view_notifications"
         android:layout_below="@+id/app_bar_layout_notifications"
         android:layout_margin="5dp"
 
