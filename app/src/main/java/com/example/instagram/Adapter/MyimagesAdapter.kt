@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.NonNull
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.instagram.Fragment.PostDetailsFragment
 import com.example.instagram.Model.Post
 import com.example.instagram.R
 import com.squareup.picasso.Picasso
@@ -45,6 +47,15 @@ class MyimagesAdapter(private val mContext: Context, mPost: List<Post>) :
 
         val post: Post = mPost!![position]
         Picasso.get().load(post.getPostimage()).into(holder.postImage)
+
+        holder.postImage.setOnClickListener {
+            val editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            editor.putString("postId", post.getPostid())
+            editor.apply()
+            (mContext as FragmentActivity).supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, PostDetailsFragment()).commit()
+        }
 
     }
 
