@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:maxLines="1"
-                    android:text="Photo"
+                    android:text="Post"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
