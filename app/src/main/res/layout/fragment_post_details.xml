@@ -33,7 +33,7 @@
                     android:maxLines="1"
                     android:text="Post"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
 
