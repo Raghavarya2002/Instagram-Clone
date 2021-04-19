@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-
+//5:59
 class HomeFragment : Fragment() {
     private var postAdapter: PostAdapter? = null
     private var postList: MutableList<Post>? = null

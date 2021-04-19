@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import java.util.*
 import java.util.Collections.reverse
@@ -132,6 +133,7 @@ class ProfileFragment : Fragment() {
         getFollowing()
         userinfo()
         myphotos()
+        getTotalNumberofPosts()
 
         return view
     }
@@ -302,7 +304,38 @@ class ProfileFragment : Fragment() {
     }
 
 
-}
+    private fun getTotalNumberofPosts(){
+        val postsRef = FirebaseDatabase.getInstance().reference.child("Posts")
+        postsRef.addValueEventListener(object :ValueEventListener{
+
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+
+                    var postCounter = 0
+                    for (snapshot in snapshot.children){
+
+                        val post = snapshot.getValue(Post::class.java)!!
+                        if (post.getPublisher() == profileId){
+                            postCounter++
+
+                        }
+                    }
+
+                    total_posts.text = " " + postCounter
+                }
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+        }
+    }
+
+
+
 
 
 
