@@ -36,6 +36,9 @@ class ProfileFragment : Fragment() {
 
     var postList: List<Post>? = null
     var myImagesAdapter: MyimagesAdapter? = null
+    var postListSaved: List<Post>? = null
+    var myImagesAdapterSavedImg: MyimagesAdapter? = null
+    var mySavesImg: List<String>? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +70,7 @@ class ProfileFragment : Fragment() {
 
         }
 
-
+        //recyclerview for uploaded images
         var recyclerViewUploadImages: RecyclerView
         recyclerViewUploadImages = view.findViewById(R.id.recycler_view_upload_pic)
         recyclerViewUploadImages.setHasFixedSize(true)
@@ -79,6 +82,16 @@ class ProfileFragment : Fragment() {
         recyclerViewUploadImages.adapter = myImagesAdapter
 
 
+        //recycler view for saved images
+        var recyclerViewSavedImages: RecyclerView
+        recyclerViewSavedImages = view.findViewById(R.id.recycler_view_saved_pic)
+        recyclerViewSavedImages.setHasFixedSize(true)
+        val linearLayoutManager2: LinearLayoutManager = GridLayoutManager(context, 3)
+        recyclerViewSavedImages.layoutManager = linearLayoutManager2
+
+        postListSaved = ArrayList()
+        myImagesAdapterSavedImg = context?.let { MyimagesAdapter(it, postListSaved as ArrayList<Post>) }
+        recyclerViewSavedImages.adapter = myImagesAdapter
 
 
 
