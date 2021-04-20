@@ -6,7 +6,6 @@
     tools:context=".Fragment.PostDetailsFragment">
 
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout_notifications"
         android:layout_width="match_parent"

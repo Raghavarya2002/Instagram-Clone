@@ -53,7 +53,7 @@ class PostAdapter(
         isLike(post.getPostid(), holder.likeButton)
         numberOfLikes(holder.likes, post.getPostid())
         getTotalComments(holder.comments, post.getPostid())
-        checkSavedStatus(post.getPostid() , holder.saveButton)
+        checkSavedStatus(post.getPostid(), holder.saveButton)
 
         holder.likeButton.setOnClickListener {
             if (holder.likeButton.tag == "Like") {
@@ -93,7 +93,7 @@ class PostAdapter(
         }
 
         holder.saveButton.setOnClickListener {
-            if (holder.saveButton.tag == "Save"){
+            if (holder.saveButton.tag == "Save") {
 
                 FirebaseDatabase.getInstance().reference
                     .child("Saves")
@@ -102,8 +102,7 @@ class PostAdapter(
                     .setValue(true)
 
 
-            }
-            else{
+            } else {
 
 
                 FirebaseDatabase.getInstance().reference
@@ -256,32 +255,32 @@ class PostAdapter(
     }
 
 
-    private fun checkSavedStatus(postid: String , imageView: ImageView){
+    private fun checkSavedStatus(postid: String, imageView: ImageView) {
 
         val saveRef = FirebaseDatabase.getInstance().reference
             .child("Saves")
             .child(firebaseUser!!.uid)
 
 
-        saveRef.addValueEventListener(object : ValueEventListener{
+        saveRef.addValueEventListener(object : ValueEventListener {
 
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                if (snapshot.child(postid).exists()){
+                if (snapshot.child(postid).exists()) {
 
                     imageView.setImageResource(R.drawable.save_large_icon)
                     imageView.tag = "Saved"
 
 
-                }
-                else{
+                } else {
                     imageView.setImageResource(R.drawable.save_unfilled_large_icon)
                     imageView.tag = "Save"
 
                 }
 
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }

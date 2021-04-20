@@ -91,7 +91,8 @@ class ProfileFragment : Fragment() {
         recyclerViewSavedImages.layoutManager = linearLayoutManager2
 
         postListSaved = ArrayList()
-        myImagesAdapterSavedImg = context?.let { MyimagesAdapter(it, postListSaved as ArrayList<Post>) }
+        myImagesAdapterSavedImg =
+            context?.let { MyimagesAdapter(it, postListSaved as ArrayList<Post>) }
         recyclerViewSavedImages.adapter = myImagesAdapterSavedImg
 
 
@@ -99,7 +100,7 @@ class ProfileFragment : Fragment() {
         recyclerViewUploadImages.visibility = View.VISIBLE
 
 
-        var uploadedImagesBtn : ImageButton
+        var uploadedImagesBtn: ImageButton
         uploadedImagesBtn = view.findViewById(R.id.images_grid_view_btn)
         uploadedImagesBtn.setOnClickListener {
 
@@ -107,7 +108,7 @@ class ProfileFragment : Fragment() {
             recyclerViewUploadImages.visibility = View.VISIBLE
         }
 
-        var SavedImagesBtn : ImageButton
+        var SavedImagesBtn: ImageButton
         SavedImagesBtn = view.findViewById(R.id.images_save_btn)
         SavedImagesBtn.setOnClickListener {
 
@@ -341,19 +342,19 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun getTotalNumberofPosts(){
+    private fun getTotalNumberofPosts() {
         val postsRef = FirebaseDatabase.getInstance().reference.child("Posts")
-        postsRef.addValueEventListener(object :ValueEventListener{
+        postsRef.addValueEventListener(object : ValueEventListener {
 
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
 
                     var postCounter = 0
-                    for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
 
                         val post = snapshot.getValue(Post::class.java)!!
-                        if (post.getPublisher() == profileId){
+                        if (post.getPublisher() == profileId) {
                             postCounter++
 
                         }
@@ -363,12 +364,14 @@ class ProfileFragment : Fragment() {
                 }
 
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
 
         })
-        }
+    }
+
     private fun mySaves() {
 
         mySavesImg = ArrayList()
@@ -378,13 +381,13 @@ class ProfileFragment : Fragment() {
             .child("Saves")
             .child(firebaseUser!!.uid)
 
-        savedRef.addValueEventListener(object : ValueEventListener{
+        savedRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
 
-                    for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
 
                         (mySavesImg as ArrayList<String>).add(snapshot.key!!)
                     }
@@ -399,7 +402,6 @@ class ProfileFragment : Fragment() {
             }
 
 
-
         })
 
 
@@ -408,34 +410,34 @@ class ProfileFragment : Fragment() {
     private fun readSavedImagesData() {
         val postsRef = FirebaseDatabase.getInstance().reference.child("Posts")
 
-        postsRef.addValueEventListener(object  : ValueEventListener{
+        postsRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-               if (snapshot.exists()){
+                if (snapshot.exists()) {
 
-                   ( postListSaved as ArrayList<Post>).clear()
+                    (postListSaved as ArrayList<Post>).clear()
 
 
-                   for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
 
-                       val post = snapshot.getValue(Post::class.java)
+                        val post = snapshot.getValue(Post::class.java)
 
-                       for (key in mySavesImg!!){
+                        for (key in mySavesImg!!) {
 
-                           if (post!!.getPostid() == key){
-                               (postListSaved as ArrayList<Post>).add(post)
+                            if (post!!.getPostid() == key) {
+                                (postListSaved as ArrayList<Post>).add(post)
 
-                           }
+                            }
 
-                       }
-                   }
+                        }
+                    }
 
-                   myImagesAdapterSavedImg!!.notifyDataSetChanged()
+                    myImagesAdapterSavedImg!!.notifyDataSetChanged()
 
-               }
+                }
             }
 
 

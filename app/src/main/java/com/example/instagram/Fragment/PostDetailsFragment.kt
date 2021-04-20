@@ -23,8 +23,7 @@ class PostDetailsFragment : Fragment() {
     private var postAdapter: PostAdapter? = null
     private var postList: MutableList<Post>? = null
 
-    private var postId : String  = ""
-
+    private var postId: String = ""
 
 
     override fun onCreateView(
@@ -32,16 +31,16 @@ class PostDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_post_details, container, false)
+        val view = inflater.inflate(R.layout.fragment_post_details, container, false)
 
 
-        val preferences = context?.getSharedPreferences("PREFS" , Context.MODE_PRIVATE)
-        if(preferences!= null){
+        val preferences = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+        if (preferences != null) {
 
-            postId = preferences.getString("postId" , "none").toString()
+            postId = preferences.getString("postId", "none").toString()
         }
 
-        var recyclerView : RecyclerView
+        var recyclerView: RecyclerView
         recyclerView = view.findViewById(R.id.recycler_view_post_details)
         recyclerView.setHasFixedSize(true)
 
@@ -56,7 +55,6 @@ class PostDetailsFragment : Fragment() {
         retrievePosts()
         return view
     }
-
 
 
     private fun retrievePosts() {

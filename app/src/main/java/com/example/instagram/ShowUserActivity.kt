@@ -10,11 +10,11 @@ import com.example.instagram.Model.User
 
 class ShowUserActivity : AppCompatActivity() {
 
-    var id : String = ""
-    var title : String = ""
+    var id: String = ""
+    var title: String = ""
     var userAdapter: UserAdapter? = null
-    var userList : List<User> ? = null
-    var idList : List<String> ? = null
+    var userList: List<User>? = null
+    var idList: List<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class ShowUserActivity : AppCompatActivity() {
         id = intent.getStringExtra("id")!!
         title = intent.getStringExtra("title")!!
 
-        val toolbar :Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.title = title
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -32,18 +32,18 @@ class ShowUserActivity : AppCompatActivity() {
             finish()
         }
 
-        var recyclerView : RecyclerView
+        var recyclerView: RecyclerView
         recyclerView = findViewById(R.id.recycler_view)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         userList = ArrayList()
-        userAdapter  = UserAdapter(this , userList as ArrayList<User> , false)
+        userAdapter = UserAdapter(this, userList as ArrayList<User>, false)
         recyclerView.adapter = userAdapter
 
 
         idList = ArrayList()
 
-        when(title){
+        when (title) {
 
 //            "likes" -> getLikes()
 //            "following" -> getFollowing()
@@ -52,8 +52,6 @@ class ShowUserActivity : AppCompatActivity() {
 
             // we'll continue tomorrow , its 11:25 pm , okay , 14:46
         }
-
-
 
 
     }
