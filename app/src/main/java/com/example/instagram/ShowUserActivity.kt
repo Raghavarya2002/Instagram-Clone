@@ -41,7 +41,7 @@ class ShowUserActivity : AppCompatActivity() {
         recyclerView.adapter = userAdapter
 
 
-        idList = ArrayList()
+        idList = ArrayList() //array list dynamic size ka array hota hai
 
         when (title) {
 
@@ -51,6 +51,7 @@ class ShowUserActivity : AppCompatActivity() {
 
 
             // we'll continue tomorrow , its 11:25 pm , okay , 14:46
+
         }
 
 
