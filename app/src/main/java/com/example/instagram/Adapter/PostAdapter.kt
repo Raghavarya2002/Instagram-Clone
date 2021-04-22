@@ -14,6 +14,7 @@ import com.example.instagram.MainActivity
 import com.example.instagram.Model.Post
 import com.example.instagram.Model.User
 import com.example.instagram.R
+import com.example.instagram.ShowUserActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -75,6 +76,13 @@ class PostAdapter(
 
 
             }
+        }
+
+        holder.likes.setOnClickListener {
+            val intent = Intent(mContext , ShowUserActivity::class.java)
+            intent.putExtra("id" , post.getPostid())
+            intent.putExtra("title" , "likes")
+            mContext.startActivity(intent)
         }
 
         holder.commentButton.setOnClickListener {

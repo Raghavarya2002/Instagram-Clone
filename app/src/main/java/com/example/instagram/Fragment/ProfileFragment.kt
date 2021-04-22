@@ -15,6 +15,7 @@ import com.example.instagram.Adapter.MyimagesAdapter
 import com.example.instagram.Model.Post
 import com.example.instagram.Model.User
 import com.example.instagram.R
+import com.example.instagram.ShowUserActivity
 import com.example.instagram.accountSettingActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -114,6 +115,20 @@ class ProfileFragment : Fragment() {
 
             recyclerViewUploadImages.visibility = View.GONE
             recyclerViewSavedImages.visibility = View.VISIBLE
+        }
+
+
+        view.total_followers.setOnClickListener{
+            val intent = Intent(context , ShowUserActivity::class.java)
+            intent.putExtra("id" , profileId)
+            intent.putExtra("title" , "followers")
+            startActivity(intent)
+        }
+        view.total_following.setOnClickListener{
+            val intent = Intent(context , ShowUserActivity::class.java)
+            intent.putExtra("id" , profileId)
+            intent.putExtra("title" , "following")
+            startActivity(intent)
         }
 
 

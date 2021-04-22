@@ -7,6 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.UserAdapter
 import com.example.instagram.Model.User
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class ShowUserActivity : AppCompatActivity() {
 
@@ -45,15 +51,137 @@ class ShowUserActivity : AppCompatActivity() {
 
         when (title) {
 
-//            "likes" -> getLikes()
-//            "following" -> getFollowing()
-//            "followers" -> getFollowers()
+            "likes" -> getLikes()
+            "following" -> getFollowing()
+            "followers" -> getFollowers()
+            "views" -> getViews()
 
 
-            // we'll continue tomorrow , its 11:25 pm , okay , 14:46
+
 
         }
 
+
+    }
+
+    private fun getViews() {
+
+    }
+
+    private fun getFollowers() {
+
+        val followersRef = FirebaseDatabase.getInstance().reference
+            .child("Follow").child(id)
+            .child("Followers")
+
+
+
+        followersRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists()) {
+
+                    (idList as ArrayList<String>).clear()
+                    for (snapshot in snapshot.children){
+                        (idList as ArrayList<String>).add(snapshot.key!!)
+                    }
+                    showUser()
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+
+        })
+
+    }
+
+    private fun getFollowing() {
+
+        val followingRef = FirebaseDatabase.getInstance().reference
+            .child("Follow").child(id)
+            .child("Following")
+
+
+
+        followingRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists()) {
+
+                    (idList as ArrayList<String>).clear()
+                    for (snapshot in snapshot.children){
+                        (idList as ArrayList<String>).add(snapshot.key!!)
+                    }
+                    showUser()
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+
+        })
+
+    }
+
+    private fun getLikes() {
+
+        val likesRef = FirebaseDatabase.getInstance().reference
+            .child("Likes").child(id!!)
+
+        likesRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    (idList as ArrayList<String>).clear()
+
+                    for (snapshot in snapshot.children){
+                        (idList as ArrayList<String>).add(snapshot.key!!)
+                    }
+                    showUser()
+                }
+
+                }
+
+            })
+
+    }
+
+    private fun showUser() {
+
+        val usersRef = FirebaseDatabase.getInstance().reference.child("Users")
+        usersRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                (userList as ArrayList<User>).clear()
+                for (snapshot in dataSnapshot.children) {
+                    val user = snapshot.getValue(User::class.java)
+
+                    for (id in idList!!){
+                        if (user!!.getuid() == id) {
+                            (userList as ArrayList<User>).add(user!!)
+
+                        }
+                    }
+
+
+
+                }
+                userAdapter?.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
 
     }
 }
