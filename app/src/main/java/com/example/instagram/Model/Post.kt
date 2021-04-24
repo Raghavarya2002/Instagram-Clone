@@ -14,32 +14,37 @@ class Post {
         this.postimage = postimage
     }
 
-    fun getPostid():String{
+    fun getPostid(): String {
         return postid
     }
-    fun getPostimage():String{
+
+    fun getPostimage(): String {
         return postimage
     }
-    fun getPublisher():String{
+
+    fun getPublisher(): String {
         return publisher
     }
-    fun getDescription():String{
+
+    fun getDescription(): String {
         return description
     }
-    fun setPostid(postid:String){
+
+    fun setPostid(postid: String) {
         this.postid = postid
     }
-    fun setPostimage(postimage:String){
+
+    fun setPostimage(postimage: String) {
         this.postimage = postimage
     }
-    fun setPublisher(publisher:String){
+
+    fun setPublisher(publisher: String) {
         this.publisher = publisher
     }
-    fun setDescription(description:String){
+
+    fun setDescription(description: String) {
         this.description = description
     }
-
-
 
 
 }

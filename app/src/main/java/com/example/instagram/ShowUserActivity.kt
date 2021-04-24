@@ -57,8 +57,6 @@ class ShowUserActivity : AppCompatActivity() {
             "views" -> getViews()
 
 
-
-
         }
 
 
@@ -82,7 +80,7 @@ class ShowUserActivity : AppCompatActivity() {
                 if (snapshot.exists()) {
 
                     (idList as ArrayList<String>).clear()
-                    for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
                         (idList as ArrayList<String>).add(snapshot.key!!)
                     }
                     showUser()
@@ -113,7 +111,7 @@ class ShowUserActivity : AppCompatActivity() {
                 if (snapshot.exists()) {
 
                     (idList as ArrayList<String>).clear()
-                    for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
                         (idList as ArrayList<String>).add(snapshot.key!!)
                     }
                     showUser()
@@ -144,15 +142,15 @@ class ShowUserActivity : AppCompatActivity() {
                 if (snapshot.exists()) {
                     (idList as ArrayList<String>).clear()
 
-                    for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
                         (idList as ArrayList<String>).add(snapshot.key!!)
                     }
                     showUser()
                 }
 
-                }
+            }
 
-            })
+        })
 
     }
 
@@ -165,13 +163,12 @@ class ShowUserActivity : AppCompatActivity() {
                 for (snapshot in dataSnapshot.children) {
                     val user = snapshot.getValue(User::class.java)
 
-                    for (id in idList!!){
+                    for (id in idList!!) {
                         if (user!!.getuid() == id) {
                             (userList as ArrayList<User>).add(user!!)
 
                         }
                     }
-
 
 
                 }

@@ -31,10 +31,8 @@ private const val ARG_PARAM2 = "param2"
 class NotificationFragment : Fragment() {
 
 
-    private var notificationList : List<Notification> ? = null
-    private var notificationAdapter : NotificationAdapter? = null
-
-
+    private var notificationList: List<Notification>? = null
+    private var notificationAdapter: NotificationAdapter? = null
 
 
     override fun onCreateView(
@@ -42,10 +40,10 @@ class NotificationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_notification, container, false)
+        val view = inflater.inflate(R.layout.fragment_notification, container, false)
 
-        var recyclerView : RecyclerView
-        recyclerView =  view.findViewById(R.id.recycler_view_notifications)
+        var recyclerView: RecyclerView
+        recyclerView = view.findViewById(R.id.recycler_view_notifications)
         recyclerView?.setHasFixedSize(true)
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
@@ -53,49 +51,48 @@ class NotificationFragment : Fragment() {
         notificationList = ArrayList()
 
 
-        notificationAdapter = NotificationAdapter(context!! , notificationList as ArrayList<Notification>)
+        notificationAdapter =
+            NotificationAdapter(context!!, notificationList as ArrayList<Notification>)
 
         recyclerView.adapter = notificationAdapter
 
         readNotification()
 
-        return  view
+        return view
 
     }
 
-    private fun     readNotification() {
+    private fun readNotification() {
         val notiRef = FirebaseDatabase.getInstance().reference
             .child("Notifications")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
-        notiRef.addValueEventListener(object : ValueEventListener{
+        notiRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()){
+                if (snapshot.exists()) {
 
-                        (notificationList as ArrayList<Notification>).clear()
+                    (notificationList as ArrayList<Notification>).clear()
 
-                        for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
 
-                            val notification = snapshot.getValue(Notification::class.java)
-                            (notificationList as ArrayList<Notification>).add(notification!!)
-
-                        }
-
-                        Collections.reverse(notificationList)
-                        notificationAdapter!!.notifyDataSetChanged()
+                        val notification = snapshot.getValue(Notification::class.java)
+                        (notificationList as ArrayList<Notification>).add(notification!!)
 
                     }
+
+                    Collections.reverse(notificationList)
+                    notificationAdapter!!.notifyDataSetChanged()
+
+                }
             }
 
 
         })
     }
-
-
 
 
 }

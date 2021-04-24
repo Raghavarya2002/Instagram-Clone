@@ -12,58 +12,62 @@ class User {
     constructor()
 
 
-    constructor( username: String , fullname: String , bio: String , image: String,  uid: String ){
+    constructor(username: String, fullname: String, bio: String, image: String, uid: String) {
         this.username = username
-        this.fullname= fullname
+        this.fullname = fullname
         this.bio = bio
         this.image = image
         this.uid = uid
 
 
-
     }
 
-    fun getUsername():String{
+    fun getUsername(): String {
 
         return username
     }
-    fun setUsername(username: String){
 
-  this.username = username
+    fun setUsername(username: String) {
+
+        this.username = username
     }
 
-    fun getfullname():String{
+    fun getfullname(): String {
 
         return fullname
     }
-    fun setfullname(fullname: String){
+
+    fun setfullname(fullname: String) {
 
         this.fullname = fullname
     }
 
-    fun getbio():String{
+    fun getbio(): String {
 
         return bio
     }
-    fun setbio(bio: String){
+
+    fun setbio(bio: String) {
 
         this.bio = bio
     }
 
-    fun getimage():String{
+    fun getimage(): String {
 
         return image
     }
-    fun setimage(image: String){
+
+    fun setimage(image: String) {
 
         this.image = image
     }
 
-    fun getuid():String{
+    fun getuid(): String {
 
         return uid
     }
-    fun setuid(uid: String){
+
+    fun setuid(uid: String) {
 
         this.uid = uid
     }

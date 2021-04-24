@@ -3,9 +3,9 @@ package com.example.instagram.Model
 class Notification {
 
 
-    private var userid : String = ""
-    private var text : String = ""
-    private var postid : String = ""
+    private var userid: String = ""
+    private var text: String = ""
+    private var postid: String = ""
     private var ispost = false
 
     constructor()
@@ -17,33 +17,37 @@ class Notification {
         this.ispost = ispost
     }
 
-    fun getUserId() : String{
+    fun getUserId(): String {
 
-        return  userid
+        return userid
 
     }
-     fun  getText() : String{
-         return text
-     }
 
-    fun  getPostId() : String{
+    fun getText(): String {
+        return text
+    }
+
+    fun getPostId(): String {
         return postid
     }
 
-    fun  isIsPost() : Boolean{
+    fun isIsPost(): Boolean {
         return ispost
     }
 
-     fun setuserId(userid: String){
-         this.userid = userid
-     }
-    fun setText(text: String){
+    fun setuserId(userid: String) {
+        this.userid = userid
+    }
+
+    fun setText(text: String) {
         this.text = text
     }
-    fun setPostId(postid: String){
+
+    fun setPostId(postid: String) {
         this.postid = postid
     }
-    fun setIsPost(ispost: Boolean){
+
+    fun setIsPost(ispost: Boolean) {
         this.ispost = ispost
     }
 

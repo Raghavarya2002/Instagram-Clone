@@ -118,16 +118,16 @@ class ProfileFragment : Fragment() {
         }
 
 
-        view.total_followers.setOnClickListener{
-            val intent = Intent(context , ShowUserActivity::class.java)
-            intent.putExtra("id" , profileId)
-            intent.putExtra("title" , "followers")
+        view.total_followers.setOnClickListener {
+            val intent = Intent(context, ShowUserActivity::class.java)
+            intent.putExtra("id", profileId)
+            intent.putExtra("title", "followers")
             startActivity(intent)
         }
-        view.total_following.setOnClickListener{
-            val intent = Intent(context , ShowUserActivity::class.java)
-            intent.putExtra("id" , profileId)
-            intent.putExtra("title" , "following")
+        view.total_following.setOnClickListener {
+            val intent = Intent(context, ShowUserActivity::class.java)
+            intent.putExtra("id", profileId)
+            intent.putExtra("title", "following")
             startActivity(intent)
         }
 
@@ -461,12 +461,13 @@ class ProfileFragment : Fragment() {
         })
 
     }
-    private fun addNotification(){
-        val notiRef =  FirebaseDatabase.getInstance().reference
+
+    private fun addNotification() {
+        val notiRef = FirebaseDatabase.getInstance().reference
             .child("Notifications")
             .child(profileId)
 
-        val notiMap = HashMap<String , Any>()
+        val notiMap = HashMap<String, Any>()
         notiMap["userid"] = firebaseUser!!.uid
         notiMap["text"] = "starting following you "
         notiMap["postid"] = ""

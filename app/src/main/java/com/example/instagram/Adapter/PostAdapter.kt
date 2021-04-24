@@ -65,7 +65,7 @@ class PostAdapter(
                     .child(firebaseUser!!.uid)
                     .setValue(true)
 
-                addNotification(post.getPublisher(),post.getPostid())
+                addNotification(post.getPublisher(), post.getPostid())
 
             } else {
 
@@ -82,9 +82,9 @@ class PostAdapter(
         }
 
         holder.likes.setOnClickListener {
-            val intent = Intent(mContext , ShowUserActivity::class.java)
-            intent.putExtra("id" , post.getPostid())
-            intent.putExtra("title" , "likes")
+            val intent = Intent(mContext, ShowUserActivity::class.java)
+            intent.putExtra("id", post.getPostid())
+            intent.putExtra("title", "likes")
             mContext.startActivity(intent)
         }
 
@@ -112,7 +112,7 @@ class PostAdapter(
                     .child(post.getPostid())
                     .setValue(true)
 
-                addNotification(post.getPublisher() , post.getPostid())
+                addNotification(post.getPublisher(), post.getPostid())
 
 
             } else {
@@ -303,12 +303,12 @@ class PostAdapter(
 
     }
 
-    private fun addNotification(userId : String , postId: String){
-        val notiRef =  FirebaseDatabase.getInstance().reference
+    private fun addNotification(userId: String, postId: String) {
+        val notiRef = FirebaseDatabase.getInstance().reference
             .child("Notifications")
             .child(userId)
 
-        val notiMap = HashMap<String , Any>()
+        val notiMap = HashMap<String, Any>()
         notiMap["userid"] = firebaseUser!!.uid
         notiMap["text"] = "liked your post "
         notiMap["postid"] = postId

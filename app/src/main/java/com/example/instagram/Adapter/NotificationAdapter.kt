@@ -24,15 +24,15 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_comments.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
-class  NotificationAdapter(
-    private val mContext : Context , private val mNotification : List<Notification>)
-    : RecyclerView.Adapter<NotificationAdapter.ViewHolder>()
-{
+class NotificationAdapter(
+    private val mContext: Context, private val mNotification: List<Notification>
+) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view = LayoutInflater.from(mContext).inflate(R.layout.notificactions_item_layout, parent, false)
+        val view = LayoutInflater.from(mContext)
+            .inflate(R.layout.notificactions_item_layout, parent, false)
         return ViewHolder(view)
 
     }
@@ -48,20 +48,16 @@ class  NotificationAdapter(
         val notification = mNotification[position]
 
 
-        if (notification.getText() == "started following you"){
+        if (notification.getText() == "started following you") {
 
             holder.text.text = "started following you"
-        }
-        else if (notification.getText() == "liked your post"){
+        } else if (notification.getText() == "liked your post") {
 
             holder.text.text = "liked your post"
-        }
-        else if (notification.getText().contains("commented:")){
+        } else if (notification.getText().contains("commented:")) {
 
-            holder.text.text = notification.getText().replace("commented:" , "commented: ")
-        }
-
-        else {
+            holder.text.text = notification.getText().replace("commented:", "commented: ")
+        } else {
             holder.text.text = notification.getText()
         }
 
@@ -70,21 +66,19 @@ class  NotificationAdapter(
 
 
 
-        userinfo(holder.profileImage , holder.userName , notification.getUserId())
+        userinfo(holder.profileImage, holder.userName, notification.getUserId())
 
-        if (notification.isIsPost()){
+        if (notification.isIsPost()) {
 
             holder.postImage.visibility = View.VISIBLE
-            getPostImage(holder.postImage , notification.getPostId())
-        }
-        else
-        {
+            getPostImage(holder.postImage, notification.getPostId())
+        } else {
             holder.postImage.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener {
 
-            if (notification.isIsPost()){
+            if (notification.isIsPost()) {
 
                 val editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
                 editor.putString("postId", notification.getPostId())
@@ -92,8 +86,7 @@ class  NotificationAdapter(
                 (mContext as FragmentActivity).supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container, PostDetailsFragment()).commit()
-            }
-            else{
+            } else {
                 val editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
                 editor.putString("profileId", notification.getUserId())
                 editor.apply()
@@ -107,7 +100,7 @@ class  NotificationAdapter(
 
 
     inner class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var postImage : ImageView
+        var postImage: ImageView
         var profileImage: CircleImageView
         var userName: TextView
         var text: TextView
@@ -122,7 +115,7 @@ class  NotificationAdapter(
 
     }
 
-    private fun userinfo(imageView: ImageView , userName :TextView , publisherId: String) {
+    private fun userinfo(imageView: ImageView, userName: TextView, publisherId: String) {
 
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherId)
         userRef.addValueEventListener(object : ValueEventListener {
@@ -147,7 +140,7 @@ class  NotificationAdapter(
         })
     }
 
-    private fun getPostImage(imageView: ImageView , postID:String) {
+    private fun getPostImage(imageView: ImageView, postID: String) {
 
         val postRef = FirebaseDatabase.getInstance().reference.child("Posts").child(postID)
         postRef.addValueEventListener(object : ValueEventListener {
@@ -169,7 +162,6 @@ class  NotificationAdapter(
             }
         })
     }
-
 
 
 }

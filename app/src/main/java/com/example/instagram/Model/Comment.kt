@@ -1,8 +1,8 @@
 package com.example.instagram.Model
 
-class Commnet{
+class Commnet {
     private var comment: String = ""
-    private var publisher: String= ""
+    private var publisher: String = ""
 
     constructor()
     constructor(comment: String, publisher: String) {
@@ -11,16 +11,19 @@ class Commnet{
     }
 
 
-    fun getComment():String{
+    fun getComment(): String {
         return comment
     }
-    fun getPublisher():String{
+
+    fun getPublisher(): String {
         return publisher
     }
-    fun setComment(comment: String){
+
+    fun setComment(comment: String) {
         this.comment = comment
     }
-    fun setPublisher(publisher: String){
+
+    fun setPublisher(publisher: String) {
         this.publisher = publisher
     }
 }
