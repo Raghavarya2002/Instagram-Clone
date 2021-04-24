@@ -167,7 +167,7 @@ class CommentsActivity : AppCompatActivity() {
 
         val notiMap = HashMap<String , Any>()
         notiMap["userid"] = firebaseUser!!.uid
-        notiMap["text"] = "commented: " + add_comment.text.toString()
+        notiMap["text"] = "commented:" + add_comment!!.text.toString()
         notiMap["postid"] = postId
         notiMap["isPost"] = true
 

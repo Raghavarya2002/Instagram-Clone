@@ -65,6 +65,8 @@ class PostAdapter(
                     .child(firebaseUser!!.uid)
                     .setValue(true)
 
+                addNotification(post.getPublisher(),post.getPostid())
+
             } else {
 
                 FirebaseDatabase.getInstance().reference
@@ -308,7 +310,7 @@ class PostAdapter(
 
         val notiMap = HashMap<String , Any>()
         notiMap["userid"] = firebaseUser!!.uid
-        notiMap["text"] = "like your post "
+        notiMap["text"] = "liked your post "
         notiMap["postid"] = postId
         notiMap["isPost"] = true
 

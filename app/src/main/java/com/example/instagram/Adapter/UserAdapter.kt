@@ -1,6 +1,7 @@
 package com.example.instagram.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.UserAdapter.*
 import com.example.instagram.Fragment.ProfileFragment
+import com.example.instagram.MainActivity
 import com.example.instagram.Model.User
 import com.example.instagram.R
 import com.example.instagram.R.layout.user_item_layout
@@ -48,12 +50,22 @@ class UserAdapter(
         checkFollowingStatus(user.getuid(), holder.followButton)
 
         holder.itemView.setOnClickListener(View.OnClickListener {
-            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-            pref.putString("profileId", user.getuid())
-            pref.apply()
+           if (isFragment){
+               val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+               pref.putString("profileId", user.getuid())
+               pref.apply()
 
-            (mContext as FragmentActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProfileFragment()).commit()
+               (mContext as FragmentActivity).supportFragmentManager.beginTransaction()
+                   .replace(R.id.fragment_container, ProfileFragment()).commit()
+           }
+            else
+           {
+               val intent = Intent(mContext, MainActivity::class.java)
+               intent.putExtra("publisherId" , user.getuid())
+               mContext.startActivity(intent)
+
+
+           }
 
         })
 
@@ -86,7 +98,7 @@ class UserAdapter(
                         }
                 }
 
-                addNotification(user.getuid()) //28:48
+                addNotification(user.getuid())
 
 
             } else {

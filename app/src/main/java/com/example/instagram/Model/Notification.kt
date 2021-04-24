@@ -37,13 +37,13 @@ class Notification {
      fun setuserId(userid: String){
          this.userid = userid
      }
-    fun setText(userid: String){
+    fun setText(text: String){
         this.text = text
     }
-    fun setPostId(userid: String){
+    fun setPostId(postid: String){
         this.postid = postid
     }
-    fun setIsPost(userid: String){
+    fun setIsPost(ispost: Boolean){
         this.ispost = ispost
     }
 
