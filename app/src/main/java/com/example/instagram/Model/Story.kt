@@ -36,7 +36,7 @@ class Story {
     }
 
     fun getUserId() : String{
-        return imageurl
+        return userid
     }
 
     fun setImageUrl(imageurl: String){
@@ -59,6 +59,6 @@ class Story {
         this.userid = userid
 
     }
-    
+
 
 }
