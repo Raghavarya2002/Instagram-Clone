@@ -329,7 +329,7 @@ class ProfileFragment : Fragment() {
                     view?.bio_profile_frag?.text = user.getbio()
                 }
 
-            }
+            }//1
 
             override fun onCancelled(error: DatabaseError) {
 
