@@ -47,15 +47,17 @@ class Story {
         this.timestart = timestart
 
     }
-    fun setTimeEnd(timeend: Long){
+    fun setTimeEnd(timeend: Long) {
         this.timeend = timeend
 
     }
-    fun setStoryid(storyid: String){
+
+    fun SetStoryId(storyid: String) {
         this.storyid = storyid
 
     }
-    fun setuserId(userid: String){
+
+    fun setuserId(userid: String) {
         this.userid = userid
 
     }

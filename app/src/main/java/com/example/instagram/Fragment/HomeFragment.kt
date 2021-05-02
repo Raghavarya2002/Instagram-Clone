@@ -43,31 +43,31 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         var recyclerView: RecyclerView? = null
+        var recyclerViewStory: RecyclerView? = null
+
+
         recyclerView = view.findViewById(R.id.recycler_view_home)
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
         recyclerView.layoutManager = linearLayoutManager
 
-
-        var recyclerViewStory: RecyclerView? = null
-        recyclerViewStory = view.findViewById(R.id.recycler_view_story)
-        val linearLayoutManager2 = LinearLayoutManager(context)
-        linearLayoutManager2.reverseLayout = true
-        linearLayoutManager2.stackFromEnd = true
-        recyclerViewStory.layoutManager = linearLayoutManager2
-
-
-
-
-
         postList = ArrayList()
         postAdapter = context?.let { PostAdapter(it, postList as ArrayList<Post>) }
         recyclerView.adapter = postAdapter
 
 
+
+
+        recyclerViewStory = view.findViewById(R.id.recycler_view_story)
+        recyclerViewStory.setHasFixedSize(true)
+        val linearLayoutManager2 =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewStory.layoutManager = linearLayoutManager2
+
+
         storyList = ArrayList()
-        storyAdapter = context?.let { StoryAdapter(it,storyList as ArrayList<Story>) }
+        storyAdapter = context?.let { StoryAdapter(it, storyList as ArrayList<Story>) }
         recyclerViewStory.adapter = storyAdapter
 
 
@@ -119,28 +119,33 @@ class HomeFragment : Fragment() {
     private fun retrieveStories() {
         val storyRef = FirebaseDatabase.getInstance().reference.child("Story")
         storyRef.addValueEventListener(object: ValueEventListener{
-            override fun onCancelled(error: DatabaseError) {
 
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 val timeCurrent = System.currentTimeMillis()
 
                 (storyList as ArrayList<Story>).clear()
-                (storyList as ArrayList<Story>).add(Story("",0,0,"",FirebaseAuth.getInstance().currentUser!!.uid))
+                (storyList as ArrayList<Story>).add(
+                    Story(
+                        "",
+                        0,
+                        0,
+                        "",
+                        FirebaseAuth.getInstance().currentUser!!.uid
+                    )
+                )
 
 
-                for (id in followingList!!){
+                for (id in followingList!!) {
 
                     var countStory = 0
-                    var story :Story ?= null
+                    var story: Story? = null
 
-                    for (snapshot in snapshot.child(id).children){
+                    for (snapshot in dataSnapshot.child(id).children) {
 
                         story = snapshot.getValue(Story::class.java)
 
-                        if (timeCurrent>story!!.getTimeStart() && timeCurrent<story!!.getTimeEnd()){
+                        if (timeCurrent > story!!.getTimeStart() && timeCurrent < story.getTimeEnd()) {
 
 
                             countStory++
@@ -162,6 +167,10 @@ class HomeFragment : Fragment() {
 
             }
 
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
 
         })
     }
@@ -174,7 +183,7 @@ class HomeFragment : Fragment() {
                 for (snapshot in snapshot.children) {
                     val post = snapshot.getValue(Post::class.java)
                     for (id in (followingList as ArrayList<String>)) {
-                        if (post!!.getPublisher().equals(id)) {
+                        if (post!!.getPublisher() == id) {
                             postList!!.add(post)
 
                         }
@@ -186,7 +195,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
 

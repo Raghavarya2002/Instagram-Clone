@@ -19,14 +19,14 @@ import kotlinx.android.synthetic.main.activity_story.*
 
 class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
 
-    var currentUserId: String = ""
-    var userId: String = ""
+    private var currentUserId: String = ""
+    private var userId: String = ""
 
     var imageList: List<String>? = null
     var storyIdsList: List<String>? = null
     var counter = 0
-    var pressTime = 0L
-    var limit = 500L
+    private var pressTime = 0L
+    private var limit = 500L
 
 
     var storiesProgressView: StoriesProgressView? = null
@@ -64,6 +64,7 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
         currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
         userId = intent.getStringExtra("userId").toString()
 
+
         storiesProgressView = findViewById(R.id.stories_progress)
 
 
@@ -76,8 +77,8 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
 
         }
 
-        getStories(userId!!)
-        userinfo(userId!!)
+        getStories(userId)
+        userinfo(userId)
 
 
         val reverse: View = findViewById(R.id.reverse)
@@ -89,7 +90,7 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
         skip.setOnClickListener { storiesProgressView!!.skip() }
         skip.setOnTouchListener(onTouchListener)
 
-        seen_number.setOnClickListener({
+        seen_number.setOnClickListener {
 
             val intent = Intent(this@StoryActivity, ShowUserActivity::class.java)
             intent.putExtra("id", userId)
@@ -98,13 +99,13 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
             startActivity(intent)
 
 
-        })
+        }
 
 
         story_delete.setOnClickListener {
             val ref = FirebaseDatabase.getInstance().reference
                 .child("Story")
-                .child(userId!!)
+                .child(userId)
                 .child(storyIdsList!![counter])
 
             ref.removeValue().addOnCompleteListener { task ->
@@ -128,7 +129,7 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
 
         val ref = FirebaseDatabase.getInstance().reference
             .child("Story")
-            .child(userId!!)
+            .child(userId)
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
@@ -146,21 +147,19 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
                     if (timeCurrent > story!!.getTimeStart() && timeCurrent < story.getTimeEnd()) {
 
                         (imageList as ArrayList<String>).add(story.getImageUrl())
-                        (storyIdsList as ArrayList<String>).add(story.getImageUrl())
+                        (storyIdsList as ArrayList<String>).add(story.getStoryId())
 
                     }
 
                 }
-
                 storiesProgressView!!.setStoriesCount((imageList as ArrayList<String>).size)
                 storiesProgressView!!.setStoryDuration(5000L)
                 storiesProgressView!!.setStoriesListener(this@StoryActivity)
                 storiesProgressView!!.startStories(counter)
-                Picasso.get().load(imageList!!.get(counter)).placeholder(R.drawable.profile)
+                Picasso.get().load(imageList!![counter]).placeholder(R.drawable.profile)
                     .into(image_story)
-                addViewToStory(storyIdsList!!.get(counter))
-                seenNumber(storyIdsList!!.get(counter))
-
+                addViewToStory(storyIdsList!![counter])
+                seenNumber(storyIdsList!![counter])
             }
 
 
@@ -198,9 +197,9 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
     private fun addViewToStory(storyId: String) {
 
 
-        val ref = FirebaseDatabase.getInstance().reference
+        FirebaseDatabase.getInstance().reference
             .child("Story")
-            .child(userId!!).child(storyId)
+            .child(userId).child(storyId)
             .child("views")
             .child(currentUserId)
             .setValue(true)
@@ -212,7 +211,7 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
 
         val ref = FirebaseDatabase.getInstance().reference
             .child("Story")
-            .child(userId!!).child(storyId)
+            .child(userId).child(storyId)
             .child("views")
 
         ref.addValueEventListener(object : ValueEventListener {
@@ -232,7 +231,7 @@ class StoryActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
     }
 
     override fun onPrev() {
-
+        if (counter - 1 < 0) return
         Picasso.get().load(imageList!![--counter]).placeholder(R.drawable.profile).into(image_story)
 
         seenNumber(storyIdsList!![counter])
