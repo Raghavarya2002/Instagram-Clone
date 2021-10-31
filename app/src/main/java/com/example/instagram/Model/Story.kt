@@ -2,11 +2,11 @@ package com.example.instagram.Model
 
 class Story {
 
-    private var imageurl : String = ""
-    private var timestart :Long = 0
-    private var timeend :  Long = 0
-    private var storyid : String = ""
-    private var userid : String = ""
+    private var imageurl: String = ""
+    private var timestart: Long = 0
+    private var timeend: Long = 0
+    private var storyid: String = ""
+    private var userid: String = ""
 
 
     constructor()
@@ -19,34 +19,36 @@ class Story {
     }
 
 
-    fun getImageUrl() : String{
+    fun getImageUrl(): String {
         return imageurl
     }
 
-    fun getTimeStart() : Long{
+    fun getTimeStart(): Long {
         return timestart
     }
 
-    fun getTimeEnd() : Long{
+    fun getTimeEnd(): Long {
         return timeend
     }
 
-    fun getStoryId() : String{
+    fun getStoryId(): String {
         return storyid
     }
 
-    fun getUserId() : String{
+    fun getUserId(): String {
         return userid
     }
 
-    fun setImageUrl(imageurl: String){
+    fun setImageUrl(imageurl: String) {
         this.imageurl = imageurl
 
     }
-    fun setTimeStart(timestart: Long){
+
+    fun setTimeStart(timestart: Long) {
         this.timestart = timestart
 
     }
+
     fun setTimeEnd(timeend: Long) {
         this.timeend = timeend
 

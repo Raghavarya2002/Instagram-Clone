@@ -7,39 +7,39 @@
     android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/story_image"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:id="@+id/story_image"
-        app:civ_border_color="#f23b5a"
-        app:civ_border_width="2dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:src="@drawable/profile">
+        android:src="@drawable/profile"
+        app:civ_border_color="#f23b5a"
+        app:civ_border_width="2dp">
 
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/story_image_seen"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:id="@+id/story_image_seen"
-        app:civ_border_color="#afafaf"
-        app:civ_border_width="2dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:src="@drawable/profile"
         android:visibility="gone"
-        android:src="@drawable/profile">
-
+        app:civ_border_color="#afafaf"
+        app:civ_border_width="2dp">
 
 
     </de.hdodenhof.circleimageview.CircleImageView>
+
     <TextView
+        android:id="@+id/story_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/story_username"
-        android:text="username"
-        android:maxLines="1"
         android:layout_gravity="center"
+        android:maxLines="1"
+        android:text="username"
         android:textColor="@color/colorBlack">
 
     </TextView>

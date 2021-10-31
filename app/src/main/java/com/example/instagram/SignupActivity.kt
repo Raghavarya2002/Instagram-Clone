@@ -2,13 +2,11 @@ package com.example.instagram
 
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.autofill.SaveInfo
 import android.text.TextUtils
-import android.util.Patterns
 import android.util.Patterns.EMAIL_ADDRESS
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase

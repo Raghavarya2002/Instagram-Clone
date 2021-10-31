@@ -1,11 +1,11 @@
 package com.example.instagram
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.Model.Story
 import com.example.instagram.Model.User
 import com.google.firebase.auth.FirebaseAuth

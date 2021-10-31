@@ -21,8 +21,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_comments.*
-import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class NotificationAdapter(
     private val mContext: Context, private val mNotification: List<Notification>

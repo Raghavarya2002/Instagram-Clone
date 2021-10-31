@@ -35,7 +35,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/inputs_background"
-        android:hint="Full Name.."
+        android:hint="Full Name..."
         android:inputType="textEmailAddress"
         android:padding="10dp" />
 
@@ -48,7 +48,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/inputs_background"
-        android:hint="Username.."
+        android:hint="Username..."
         android:inputType="text"
         android:padding="10dp" />
 
@@ -61,7 +61,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/inputs_background"
-        android:hint="Email.."
+        android:hint="Email..."
         android:inputType="textEmailAddress"
         android:padding="10dp" />
 
@@ -75,7 +75,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/inputs_background"
-        android:hint="Password.."
+        android:hint="Password..."
         android:inputType="textPassword"
         android:padding="10dp" />
 
@@ -89,7 +89,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="20dp"
         android:background="@android:color/white"
-        android:text="SignUp"
+        android:text="Signup"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="17sp" />
@@ -103,7 +103,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="20dp"
         android:background="@android:color/transparent"
-        android:text="Already have an account? Log in. "
+        android:text="Already have an account ? Log in"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="15sp" />

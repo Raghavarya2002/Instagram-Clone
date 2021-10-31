@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.instagram.Adapter.UserAdapter.*
+import com.example.instagram.Adapter.UserAdapter.ViewHolder
 import com.example.instagram.Fragment.ProfileFragment
 import com.example.instagram.MainActivity
 import com.example.instagram.Model.User

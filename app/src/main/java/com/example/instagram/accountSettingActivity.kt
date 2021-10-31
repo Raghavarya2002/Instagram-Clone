@@ -4,10 +4,9 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.Model.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -22,7 +21,6 @@ import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_account_setting.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
-import kotlin.coroutines.Continuation
 
 class accountSettingActivity : AppCompatActivity() {
 

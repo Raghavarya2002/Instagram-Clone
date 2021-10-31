@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="60dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
+    android:orientation="vertical"
 
     >
 
@@ -14,41 +14,39 @@
         android:layout_marginTop="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/story_image"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:id="@+id/story_image"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:src="@drawable/profile">
 
 
-
         </de.hdodenhof.circleimageview.CircleImageView>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/story_add"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:id="@+id/story_add"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:background="@android:color/white"
 
             android:src="@drawable/add">
-
 
 
         </de.hdodenhof.circleimageview.CircleImageView>
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/add_story_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:maxLines="1"
         android:text="Add Story"
         android:textColor="@color/colorBlack"
-        android:maxLines="1"
-        android:textSize="12sp"
-        android:id="@+id/add_story_text"
-        android:layout_gravity="center">
+        android:textSize="12sp">
 
     </TextView>
 

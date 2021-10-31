@@ -2,7 +2,6 @@ package com.example.instagram.Adapter
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -52,15 +51,13 @@ class StoryAdapter(private val mContext: Context, private val mStory: List<Story
             addStory_text = itemView.findViewById(R.id.add_story_text)
 
 
-
-
         }
 
     }
 
     override fun getItemViewType(position: Int): Int {
 
-        if (position == 0){
+        if (position == 0) {
             return 0
         }
         return 1
