@@ -3,6 +3,33 @@ This is basically  Instagram clone app in which I develop various types of funct
 
 ## Here are the Screenshots for the whole Apllication <br><br>
 
+         notificationpage.jpg      
+<a href="url"><img src="https://github.com/Raghavarya2002/Instagram-Clone/blob/master/Snapshots/login.png"  height="400" width="200" ></a>
+<a href="url"><img src="https://github.com/Raghavarya2002/Instagram-Clone/blob/master/Snapshots/homepage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/profilepage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/addpost.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/addpostedit.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/cropimage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/editprofilepage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/followfollowingpage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/multiplestorypage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/searchpage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/likephoto.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/notificationpage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/storypage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/addingstory.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/storyseenpage.jpg"  height="400" width="200" ></a> </a> 
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/storyhomepage.jpg"  height="400" width="200" ></a> </a>  
+<a href="url"><img src="https://github.com/Raghavarya2002/NotesMaker/blob/master/Snapshots/viewaddstory.jpg"  height="400" width="200" ></a>
+
+
+
+
+
+
+
+
+
 ## **Login & SignUp Page**<br><br>
 
 ![login](https://user-images.githubusercontent.com/68361729/160377232-e6315e24-ee41-432c-ae90-2c123b2623a7.jpg)<br><br>
