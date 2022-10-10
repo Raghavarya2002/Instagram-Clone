@@ -1,7 +1,7 @@
 # Instagram-Clone
 This is basically  Instagram clone app in which I develop various types of functionalities of real instagram , and for storage purpose I used Firebase , and I'll add more functionalities in my Instagram Clone .
 
-## Here are the Screenshots for the whole Apllication <br><br>
+## Here are the Screenshots for the whole Apllication :- <br><br>
 
      
 <a href="url"><img src="https://github.com/Raghavarya2002/Instagram-Clone/blob/master/Snapshots/login.png"  height="400" width="200" ></a>
