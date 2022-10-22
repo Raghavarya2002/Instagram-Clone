@@ -5,4 +5,9 @@
     <string name="title_notifications">Notifications</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="post_uploaded_successfully">Post uploaded successfully.</string>
+    <string name="please_select_an_image_first">Please Select an image first</string>
+    <string name="please_write_description">Please write description....</string>
+    <string name="new_post">New Post</string>
+    <string name="please_wait_we_re_adding_your_post">Please wait , we\'re adding your post...</string>
 </resources>
